@@ -116,10 +116,10 @@ func FetchPgx(conn *pgx.Conn, id int) model {
 	return dat
 }
 
-func FetchPgxByState(conn *pgx.Conn, state string) int {
+func FetchPgxByColumn(conn *pgx.Conn, state string) int {
 	//dat := model{}
 	var count int
-	err := conn.QueryRow(context.Background(), "SELECT COUNT(*) FROM test WHERE state = $1", state).Scan(&count)
+	err := conn.QueryRow(context.Background(), "SELECT COUNT(*) FROM test WHERE state=$1;", state).Scan(&count)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -131,47 +131,75 @@ func main() {
 
 	defer db.Close()
 	States := []string{"Kansas", "Rhode Island", "Texas", "Alaska", "North Dakota", "Iowa", "Massachusetts", "Pennsylvania", "New Jersey", "East Damore"}
-	//conn, _ := pgx.Connect(context.Background(), "postgres://postgres:postgre@localhost:5432/benchDB")
-	//defer conn.Close(context.Background())
-
-	g, err := gorm.Open("postgres", db)
-	defer g.Close()
-	if err != nil {
-		log.Panic("not able to open GORM connection ", err)
-	}
 
 	Iters_list := []int{
-		100,
-		500,
 		1000,
+		5000,
+		10000,
 	}
+	test_iter_num := 3
+	FetchByID := false
+	package_list := []string{"Native SQL", "GORM", "PGX"}
 
-	//Single Fetch Queries
-	for _, j := range Iters_list {
-		t1 := time.Now()
-		var Entry_num int
-		for i := 0; i < j; i++ {
-			//randomId := rand.Intn(100000)
-			//_, err := FetchNative(randomId)
-			//FetchGORM(g, randomId)
-			//FetchPgx(conn, randomId)
-			/* if err != nil {
-				log.Panic("Error in Query segment :- ", err)
+	//Setup for GORM
+	g, err := gorm.Open("postgres", db)
+	if err != nil {
+		log.Panic("not able to open connection ", err)
+	}
+	defer g.Close()
+
+	//Setup for PGX
+	conn, err := pgx.Connect(context.Background(), "postgres://postgres:postgre@localhost:5432/benchDB")
+
+	if err != nil {
+		log.Panic("not able to open connection ", err)
+	}
+	defer conn.Close(context.Background())
+
+	for _, p_name := range package_list {
+		fmt.Println("\nResults for ", p_name)
+
+		// Loop for test iterations
+		for test_iter := 1; test_iter < test_iter_num+1; test_iter++ {
+			fmt.Println("\nTest number :- ", test_iter)
+
+			for _, j := range Iters_list {
+				t1 := time.Now()
+				var Entry_num int
+				for i := 0; i < j; i++ {
+					if FetchByID {
+						randomId := rand.Intn(100000) + 1
+						if p_name == "Native SQL" {
+							FetchNative(randomId)
+						} else if p_name == "GORM" {
+							FetchGORM(g, randomId)
+						} else {
+							FetchPgx(conn, randomId)
+						}
+						Entry_num += 1
+
+					} else {
+						if p_name == "Native SQL" {
+							Entry_num += FetchNativeByColumn(States[rand.Intn(9)+1])
+
+						} else if p_name == "GORM" {
+							Entry_num += FetchGORMByColumn(g, States[rand.Intn(9)+1])
+						} else {
+							Entry_num += FetchPgxByColumn(conn, States[rand.Intn(9)+1])
+						}
+					}
+
+				}
+				fmt.Println("The time taken to fetch ", j, " in ", time.Since(t1), "and fetched around ", Entry_num, " responses")
+
 			}
-			Entry_num += 1
-			//fmt.Println(TempDat)
-			*/
-
-			//Entry_num += FetchNativeByColumn(States[rand.Intn(9)+1])
-			Entry_num += FetchGORMByColumn(g, States[rand.Intn(9)+1])
 
 		}
-		fmt.Println("The time taken to fetch ", j, " in ", time.Since(t1), "and fetched around ", Entry_num, " responses")
 
 	}
 
 	//fmt.Println(FetchNativeByColumn("Boston"))
 
-	fmt.Println(FetchGORMByColumn(g, States[rand.Intn(9)+1]))
-
+	//fmt.Println(FetchGORMByColumn(g, States[rand.Intn(9)+1]))
+	//fmt.Println(FetchPgxByColumn(conn, States[rand.Intn(9)+1]))
 }
