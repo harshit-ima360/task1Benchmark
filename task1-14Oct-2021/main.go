@@ -101,12 +101,15 @@ func FetchGORM(db *gorm.DB, id int) model {
 }
 
 func FetchGORMByColumn(db *gorm.DB, state string) int {
-	var models []model
+	var TempModel model
+	//TempModel.State = state
 	//var count int
 	//db.Where("state = ?", state).Find(&models)
-	db.Table("test").Select("COUNT(*)").Where("state = ?", state).Scan(&models)
+	//db.Table("test").Select("COUNT(*)").Where("state = ?", state).Scan(&models)
 	//_ = db.Raw("SELECT COUNT(*) FROM test WHERE state = ?", state).Scan(&count)
-	return len(models)
+	result := db.Find(&TempModel, "state = ?", state)
+	//fmt.Println(TempModel)
+	return int(result.RowsAffected)
 }
 
 func FetchPgx(conn *pgx.Conn, id int) model {
@@ -133,13 +136,14 @@ func main() {
 	States := []string{"Kansas", "Rhode Island", "Texas", "Alaska", "North Dakota", "Iowa", "Massachusetts", "Pennsylvania", "New Jersey", "East Damore"}
 
 	Iters_list := []int{
+		100,
+		500,
 		1000,
-		5000,
-		10000,
 	}
 	test_iter_num := 3
 	FetchByID := false
-	package_list := []string{"Native SQL", "GORM", "PGX"}
+	//"Native SQL", "GORM", "PGX"
+	package_list := []string{"GORM"}
 
 	//Setup for GORM
 	g, err := gorm.Open("postgres", db)

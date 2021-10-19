@@ -1,0 +1,138 @@
+1 
+{
+Testing with  No Indexings
+
+Tried 100 Done 99 Insertions in 1.112266663s
+Tried 500 Done 499 Insertions in 5.6486726s
+Tried 1000 Done 999 Insertions in 11.582507433s
+Tried 10000 Done 9999 Insertions in 2m55.055295391s
+
+Testing with  1 Indexing
+
+Created the id indexings on test
+Tried 100 Done 99 Insertions in 1.096516815s
+Tried 500 Done 499 Insertions in 5.603630773s
+Tried 1000 Done 999 Insertions in 11.716439257s
+Tried 10000 Done 9999 Insertions in 1m59.273774632s
+
+Testing with  10 Indexings
+
+Created the name indexings on test
+Created the ssn indexings on test
+Created the email indexings on test
+Created the phone indexings on test
+Created the company indexings on test
+Created the state indexings on test
+Created the city indexings on test
+Created the credit_card indexings on test
+Created the phone2 indexings on testTime taken for indexing is  34.944893845s
+
+Tried 100 Done 99 Insertions in 1.096276601s
+Tried 500 Done 499 Insertions in 5.772492298s
+Tried 1000 Done 999 Insertions in 11.556369275s
+Tried 10000 Done 9999 Insertions in 1m58.5202049s
+Cleaned the phone2 indexings
+Cleaned the credit_card indexings
+Cleaned the city indexings
+Cleaned the state indexings
+Cleaned the company indexings
+Cleaned the phone indexings
+Cleaned the email indexings
+Cleaned the ssn indexings
+Cleaned the name indexings
+Cleaned the id indexingsharshit_ima360@war-machine:~/Desktop/GithubRepos/task1Benchmark/task2_insertion with Index$ go run main.go 
+}
+
+
+2 {
+
+
+Testing with  No Indexings
+
+Tried 100 Done 100 Insertions in 1.106433612s
+Tried 500 Done 500 Insertions in 5.779921954s
+Tried 1000 Done 1000 Insertions in 11.576731714s
+Tried 10000 Done 10000 Insertions in 1m58.888866657s
+
+Testing with  1 Indexing
+
+Created the id indexings on test
+Tried 100 Done 100 Insertions in 1.096504517s
+Tried 500 Done 500 Insertions in 5.814556715s
+Tried 1000 Done 1000 Insertions in 11.671357477s
+Tried 10000 Done 10000 Insertions in 1m58.052834705s
+
+Testing with  10 Indexings
+
+Created the name indexings on test
+Created the ssn indexings on test
+Created the email indexings on test
+Created the phone indexings on test
+Created the company indexings on test
+Created the state indexings on test
+Created the city indexings on test
+Created the credit_card indexings on test
+Created the phone2 indexings on testTime taken for indexing is  34.347695105s
+
+Tried 100 Done 100 Insertions in 1.096998586s
+Tried 500 Done 500 Insertions in 5.772776408s
+Tried 1000 Done 1000 Insertions in 12.44989383s
+Tried 10000 Done 10000 Insertions in 2m1.304408911s
+Cleaned the phone2 indexings
+Cleaned the credit_card indexings
+Cleaned the city indexings
+Cleaned the state indexings
+Cleaned the company indexings
+Cleaned the phone indexings
+Cleaned the email indexings
+Cleaned the ssn indexings
+Cleaned the name indexings
+Cleaned the id indexingsharshit_ima360@war-machine:~/Desktop/GithubRepos/task1Benchmark/task2_insertion with Index$ go run main.go 
+}
+
+3 {
+
+
+Testing with  No Indexings
+
+Tried 100 Done 100 Insertions in 1.235247721s
+Tried 500 Done 500 Insertions in 5.768743573s
+Tried 1000 Done 1000 Insertions in 11.60420256s
+Tried 10000 Done 10000 Insertions in 1m57.363603942s
+
+Testing with  1 Indexing
+
+Created the id indexings on test
+Tried 100 Done 100 Insertions in 1.096122671s
+Tried 500 Done 500 Insertions in 5.714153976s
+Tried 1000 Done 1000 Insertions in 12.215678596s
+Tried 10000 Done 10000 Insertions in 1m58.952169703s
+
+Testing with  10 Indexings
+
+Created the name indexings on test
+Created the ssn indexings on test
+Created the email indexings on test
+Created the phone indexings on test
+Created the company indexings on test
+Created the state indexings on test
+Created the city indexings on test
+Created the credit_card indexings on test
+Created the phone2 indexings on testTime taken for indexing is  35.549065776s
+
+Tried 100 Done 100 Insertions in 1.141050283s
+Tried 500 Done 500 Insertions in 5.640731318s
+Tried 1000 Done 1000 Insertions in 11.424571353s
+Tried 10000 Done 10000 Insertions in 1m58.943713672s
+Cleaned the phone2 indexings
+Cleaned the credit_card indexings
+Cleaned the city indexings
+Cleaned the state indexings
+Cleaned the company indexings
+Cleaned the phone indexings
+Cleaned the email indexings
+Cleaned the ssn indexings
+Cleaned the name indexings
+Cleaned the id indexingsharshit_ima360@war-machine:~/Desktop/GithubRepos/task1Benchmark/task2_insertion with Index$ 
+
+}
